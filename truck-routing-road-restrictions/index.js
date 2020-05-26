@@ -1,26 +1,22 @@
-/**
- * A full list of available request parameters can be found in the Routing API documentation.
- * see:  http://developer.here.com/rest-apis/documentation/routing/topics/resource-calculate-route.html
- */
 var routeRequestParams = {
   mode: 'fastest;truck',
   waypoint0: 'geo!40.7249546323,-74.0110042', // Manhattan
   waypoint1: 'geo!40.7324386599,-74.0341396', // Newport
   representation: 'display',
   routeattributes : 'waypoints,summary,shape,legs',
-  'metricSystem': 'imperial'
+  'metricSystem': 'metric'
 };
 
 function calculateRoutes(platform) {
   var router = platform.getRoutingService();
 
-  // The blue route showing a simple truck route
+  // The blue route = simple truck route
   calculateRoute(router, routeRequestParams, {
     strokeColor: 'rgba(0, 128, 255, 0.7)',
     lineWidth: 10
   });
 
-  // The green route showing a truck route with a trailer
+  // The green route = truck route with a trailer
   calculateRoute(router, Object.assign(routeRequestParams, {
     trailersCount: 1
   }), {
@@ -28,7 +24,7 @@ function calculateRoutes(platform) {
     lineWidth: 7
   });
 
-  // The violet route showing a truck route with a trailer
+  // The violet route = truck route with a trailer
   calculateRoute(router, Object.assign(routeRequestParams, {
     trailersCount: 1,
     shippedHazardousGoods: 'flammable'
@@ -39,7 +35,7 @@ function calculateRoutes(platform) {
 }
 
 /**
- * Calculates and displays a route.
+ * Calculate and display routes
  * @param {Object} params The Routing API request parameters
  * @param {H.service.RoutingService} router The service stub for requesting the Routing API
  * @param {mapsjs.map.SpatialStyle.Options} style The style of the route to display on the map
@@ -50,16 +46,13 @@ function calculateRoute (router, params, style) {
   }, console.error);
 }
 
-/**
- * Boilerplate map initialization code starts below:
- */
+//map initialization //
 
-// set up containers for the map  + panel
+//containers for the map  + panel
 var mapContainer = document.getElementById('map'),
   routeInstructionsContainer = document.getElementById('panel');
 
 // Step 1: initialize communication with the platform
-// In your own code, replace variable window.apikey with your own apikey
 var platform = new H.service.Platform({
   apikey: '-MbyC0p21GbQh1Z3oSOjXk-W9v97QlSi97HWX4RKkOk'
 });
@@ -70,8 +63,8 @@ var defaultLayers = platform.createDefaultLayers();
 var map = new H.Map(mapContainer,
   // Set truck restriction layer as a base map
   defaultLayers.vector.normal.truck,{
-  center: {lat: 40.745390, lng: -74.022917},
-  zoom: 13.2,
+  center: {lat: 40.66168689, lng: -74.03610060},
+  zoom: 11,
   pixelRatio: window.devicePixelRatio || 1
 });
 // add a resize listener to make sure that the map occupies the whole container
